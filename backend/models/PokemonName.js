@@ -5,6 +5,8 @@ const PokemonNameSchema = new mongoose.Schema({
     name: String
 });
 
+PokemonNameSchema.index({ id: 1 });
+PokemonNameSchema.index({ name: 1 });
 const PokemonName = mongoose.model("PokemonName", PokemonNameSchema, "pokemonNames")
 
 export default PokemonName;
