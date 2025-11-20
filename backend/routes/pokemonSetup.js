@@ -7,6 +7,15 @@ const router = express.Router();
 // GET /setup
 router.get("/setup", async (req, res) => {
     try {
+        const count = await PokemonName.countDocuments();
+
+        // If already has data, skip API fetch
+        if (count > 0) {
+            const data = await PokemonName.find().sort({ id: 1 });
+            return res.json({ fromDB: true, data });
+        }
+
+        // Fetch all pokemon
         const apiRes = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000");
         const list = apiRes.data.results.map((p, index) => ({
             id: index + 1,
@@ -15,7 +24,7 @@ router.get("/setup", async (req, res) => {
 
         await PokemonName.insertMany(list);
 
-        return res.json({ data: list });
+        return res.json({ fromDB: false, data: list });
 
     } catch (err) {
         console.error(err);
