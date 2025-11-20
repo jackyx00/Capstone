@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Route, Routes } from "react-router";
 // import './App.css'
 
 function App() {
@@ -14,6 +15,16 @@ function App() {
 
   return (
     <>
+      <div>
+        <Routes>
+          {/* homepage */}
+          <Route path="/"/>
+          {/* marketplace */}
+          <Route path="/trade"/>
+          {/* settings */}
+          <Route path="/settings"/>
+        </Routes>
+      </div>
       <h1>Pokémon Marketplace</h1>
       <p>Welcome!</p>
     </>
