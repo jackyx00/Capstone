@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import Homepage from "./pages/Homepage"
+import Nav from "./components/Nav"
 // import './App.css'
 
 function App() {
@@ -15,8 +16,8 @@ function App() {
   }, []);
 
   return (
-    <>
-      <div>
+      <div className="App">
+        <Nav />
         <Routes>
           {/* homepage */}
           <Route path="/" element={<Homepage />}/>
@@ -26,7 +27,6 @@ function App() {
           <Route path="/settings"/>
         </Routes>
       </div>
-    </>
   );
 }
 
