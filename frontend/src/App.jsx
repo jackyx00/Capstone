@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router";
+import Homepage from "./pages/Homepage"
 // import './App.css'
 
 function App() {
@@ -18,15 +19,13 @@ function App() {
       <div>
         <Routes>
           {/* homepage */}
-          <Route path="/"/>
+          <Route path="/" element={<Homepage />}/>
           {/* marketplace */}
           <Route path="/trade"/>
           {/* settings */}
           <Route path="/settings"/>
         </Routes>
       </div>
-      <h1>Pokémon Marketplace</h1>
-      <p>Welcome!</p>
     </>
   );
 }
