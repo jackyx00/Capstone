@@ -5,13 +5,18 @@ html, body {
 .nav {
   display: flex;
   justify-content: space-between;
-  background-color: red;
-  color: white;
-  padding: 0.5em;
-  font-size: 2em;
+  background-color: rgba(255, 0, 0, 0.7);
+  padding: 0.5em 5em;
+  font-size: 1.5em;
+  border-radius: 0.5em;
 }
 
 .nav a {
   color: white;
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: yellow;
 }
