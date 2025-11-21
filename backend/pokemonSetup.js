@@ -1,21 +1,19 @@
-import express from "express";
 import axios from "axios";
-import PokemonName from "../models/PokemonName.js";
+import PokemonName from "./models/PokemonName.js";
 
-const router = express.Router();
-
-// GET /setup
-router.get("/setup", async (req, res) => {
+// run setup once when web app launch
+async function runPokemonSetup() {
     try {
         const count = await PokemonName.countDocuments();
 
         // If already has data, skip API fetch
         if (count > 0) {
-            const data = await PokemonName.find().sort({ id: 1 });
-            return res.json({ fromDB: true, data });
+            console.log("Redirecting...");
+            return;
         }
 
         // Fetch all pokemon
+        console.log("Fetching...")
         const apiRes = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000");
         const list = apiRes.data.results.map((p, index) => ({
             id: index + 1,
@@ -24,12 +22,12 @@ router.get("/setup", async (req, res) => {
 
         await PokemonName.insertMany(list);
 
-        return res.json({ fromDB: false, data: list });
+        console.log("Stored Successfully");
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Pokémon setup failed" });
     }
-});
+};
 
-export default router;
+export default runPokemonSetup;
