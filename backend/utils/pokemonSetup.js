@@ -1,5 +1,5 @@
 import axios from "axios";
-import PokemonName from "./models/PokemonName.js";
+import PokemonName from "../models/PokemonName.js";
 
 // run setup once when web app launch
 async function runPokemonSetup() {
