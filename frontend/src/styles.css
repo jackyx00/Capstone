@@ -1,0 +1,17 @@
+html, body {
+    background-color: skyblue;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: red;
+  color: white;
+  padding: 0.5em;
+  font-size: 2em;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+}

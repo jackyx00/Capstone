@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import Homepage from "./pages/Homepage"
 import Nav from "./components/Nav"
-// import './App.css'
+import './styles.css'
 
 function App() {
   useEffect(() => {

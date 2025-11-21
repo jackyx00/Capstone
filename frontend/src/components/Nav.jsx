@@ -9,6 +9,9 @@ export default function Nav (props) {
       <Link to="/trade">
         <div>Trade</div>
       </Link>
+      <Link to="/credits">
+        <div>Credits</div>
+      </Link>
       <Link to="/settings">
         <div>Settings</div>
       </Link>
