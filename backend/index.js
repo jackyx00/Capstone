@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import connectDB from './db.js';
 import runPokemonSetup from './utils/pokemonSetup.js'
+import pokemonRoute from "./routes/pokemon.js"
 
 const app = express()
 const port = process.env.PORT
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // app.use("/pokemon", pokemonSetupRoute)
+app.use("/pokemon", pokemonRoute)
 
 app.listen(port, () => {
     console.log('Listening on port: ' + port)
