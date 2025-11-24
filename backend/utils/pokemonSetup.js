@@ -17,7 +17,7 @@ async function runPokemonSetup() {
         const apiRes = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10000");
         const list = apiRes.data.results.map((p, index) => ({
             id: index + 1,
-            name: p.name
+            name: p.name.charAt(0).toUpperCase() + p.name.slice(1)
         }));
 
         await PokemonName.insertMany(list);

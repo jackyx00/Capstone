@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function PokemonAutocomplete({ label }) {
+function PokemonAutocomplete({ label, onSelect }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [show, setShow] = useState(false);
@@ -20,14 +20,11 @@ function PokemonAutocomplete({ label }) {
       return;
     }
 
-    const controller = new AbortController();
-
     async function fetchNames() {
       try {
         const port = import.meta.env.VITE_BACKEND_PORT;
         const res = await fetch(
-          `http://localhost:${port}/pokemon?search=${query}`,
-          { signal: controller.signal }
+          `http://localhost:${port}/pokemon?search=${query}`
         );
         const data = await res.json();
         setSuggestions(data);
@@ -38,7 +35,6 @@ function PokemonAutocomplete({ label }) {
     }
 
     fetchNames();
-    return () => controller.abort();
   }, [query, manualSelect]);
 
   // Hide dropdown when clicking outside
@@ -51,11 +47,6 @@ function PokemonAutocomplete({ label }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-    // function for capitalize selected pokemon
-  function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
   return (
     <div className="autocomplete-wrapper" ref={ref}>
@@ -79,12 +70,13 @@ function PokemonAutocomplete({ label }) {
               key={p.id}
               className="autocomplete-item"
               onClick={() => {
-                setQuery(capitalize(p.name));
+                setQuery(p.name);
                 setShow(false);
                 setManualSelect(true);
+                onSelect(p);
               }}
             >
-              {capitalize(p.name)}
+              {p.name}
             </div>
           ))}
         </div>
