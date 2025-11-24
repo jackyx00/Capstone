@@ -32,7 +32,9 @@ function PokemonAutocomplete({ label }) {
         const data = await res.json();
         setSuggestions(data);
         setShow(true);
-      } catch {}
+      } catch(e) {
+        console.error(e);
+      }
     }
 
     fetchNames();
