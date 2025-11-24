@@ -41,6 +41,26 @@ form {
   max-width: 400px;
 }
 
+.autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.autocomplete-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.autocomplete-input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
 .autocomplete-dropdown {
   position: absolute;
   top: 70px;

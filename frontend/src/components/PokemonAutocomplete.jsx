@@ -45,14 +45,15 @@ function PokemonAutocomplete({ label }) {
   }, []);
 
   return (
-    <div ref={ref}>
-      <label>{label}</label>
+    <div className="autocomplete-wrapper" ref={ref}>
+      <label className="autocomplete-label">{label}</label>
 
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value.toLowerCase())}
         placeholder="Type Pokémon name..."
+        className="autocomplete-input"
       />
 
       {show && suggestions.length > 0 && (
