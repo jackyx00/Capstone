@@ -4,11 +4,17 @@ function PokemonAutocomplete({ label }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [show, setShow] = useState(false);
+  const [manualSelect, setManualSelect] = useState(false);
 
   const ref = useRef(null);
 
   // Search Pokémon names
   useEffect(() => {
+    // no refetch if user select
+    if (manualSelect) {
+      return;
+    }
+
     if (query.trim().length === 0) {
       setSuggestions([]);
       return;
@@ -31,7 +37,7 @@ function PokemonAutocomplete({ label }) {
 
     fetchNames();
     return () => controller.abort();
-  }, [query]);
+  }, [query, manualSelect]);
 
   // Hide dropdown when clicking outside
   useEffect(() => {
@@ -44,16 +50,24 @@ function PokemonAutocomplete({ label }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+    // function for capitalize selected pokemon
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <div className="autocomplete-wrapper" ref={ref}>
       <label className="autocomplete-label">{label}</label>
 
       <input
+        className="autocomplete-input"
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value.toLowerCase())}
+        onChange={(e) => {
+            setManualSelect(false);
+            setQuery(e.target.value);
+        }}
         placeholder="Type Pokémon name..."
-        className="autocomplete-input"
       />
 
       {show && suggestions.length > 0 && (
@@ -63,11 +77,12 @@ function PokemonAutocomplete({ label }) {
               key={p.id}
               className="autocomplete-item"
               onClick={() => {
-                setQuery(p.name);
+                setQuery(capitalize(p.name));
                 setShow(false);
+                setManualSelect(true);
               }}
             >
-              {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
+              {capitalize(p.name)}
             </div>
           ))}
         </div>
