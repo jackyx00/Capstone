@@ -38,7 +38,7 @@ function Homepage() {
 
     const spriteUrl = data?.sprites?.official_artwork_front || null;
 
-    setSpriteCache(prev => ({ ...prev, [name]: spriteUrl }));
+    setSpriteCache((prev) => ({ ...prev, [name]: spriteUrl }));
     return spriteUrl;
   }
 
@@ -54,7 +54,7 @@ function Homepage() {
   const totalPages = Math.ceil(trades.length / TRADES_PER_PAGE);
 
   return (
-<div className="pokedex-container">
+    <div className="pokedex-container">
       <h1 className="pokedex-title">PokéTrades</h1>
       <h2 className="pokedex-subtitle">Ongoing Trades</h2>
 
@@ -62,7 +62,6 @@ function Homepage() {
       <div className="pokedex-grid">
         {displayTrades.map((t) => (
           <div key={t._id} className="pokedex-card">
-            
             {/* Offer Pokémon */}
             <img
               src={spriteCache[t.offerPokemon]}
@@ -80,7 +79,6 @@ function Homepage() {
               className="pokedex-sprite"
             />
             <div className="pokedex-name">{t.receivePokemon}</div>
-
           </div>
         ))}
       </div>
@@ -91,9 +89,7 @@ function Homepage() {
           <button
             key={i}
             className={
-              page === i + 1
-                ? "pokedex-page-btn active"
-                : "pokedex-page-btn"
+              page === i + 1 ? "pokedex-page-btn active" : "pokedex-page-btn"
             }
             onClick={() => setPage(i + 1)}
           >

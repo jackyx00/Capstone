@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   const search = req.query.search?.toLowerCase() || "";
 
   const results = await PokemonName.find({
-    name: { $regex: search, $options: "i" }
+    name: { $regex: search, $options: "i" },
   })
     .sort({ id: 1 })
     .limit(10);
@@ -20,13 +20,14 @@ router.get("/by-name/:name", async (req, res) => {
   try {
     const name = req.params.name;
     const pokemon = await PokemonName.findOne({
-      name: new RegExp("^" + name + "$", "i")
+      name: new RegExp("^" + name + "$", "i"),
     });
 
     if (!pokemon) return res.status(404).json(null);
 
     res.json(pokemon);
-  } catch (err) {
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Error fetching Pokémon" });
   }
 });
