@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import Homepage from "./pages/Homepage";
 import Trade from "./pages/Trade";
 import Credits from "./pages/Credits";
+import Quiz from "./pages/Quiz";
 import "./styles.css";
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
         <Route path="/trade" element={<Trade />} />
         {/* credits */}
         <Route path="/credits" element={<Credits />} />
+        {/* quiz */}
+        <Route path="/quiz" element={<Quiz />} />
         {/* settings */}
         <Route path="/settings" />
       </Routes>

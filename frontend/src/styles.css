@@ -105,7 +105,7 @@ hr {
   border-radius: 6px;
 }
 
-/* Homepage Background */
+/* Homepage */
 .pokedex-container {
   padding: 20px;
   margin: 20px;
@@ -196,4 +196,67 @@ hr {
 .pokedex-page-btn.active {
   background: #b71c1c !important;
   color: white !important;
+}
+
+/* Quiz */
+.quiz-container {
+  padding: 20px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: "Rammetto One", sans-serif;
+}
+
+.quiz-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0px #333;
+}
+
+.quiz-coins {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2a75bb;
+}
+
+.quiz-image {
+  width: 200px;
+  margin: 20px 0;
+  filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3));
+}
+
+.quiz-choices {
+  margin-top: 20px;
+}
+
+.quiz-choice-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ffcb05;
+  border: 3px solid #2a75bb;
+  transition: 0.2s ease-in-out;
+  font-family: "Rammetto One", sans-serif;
+}
+
+.quiz-choice-btn:hover {
+  background: #f7d84b;
+  transform: scale(1.03);
+}
+
+.quiz-feedback {
+  margin-top: 20px;
+  font-size: 22px;
+  color: #d32f2f;
+  min-height: 28px;
+}
+
+.quiz-loading {
+  text-align: center;
+  font-size: 24px;
+  padding: 40px;
 }

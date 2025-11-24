@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function Nav (props) {
+export default function Nav() {
   return (
     <div className="nav">
       <Link to="/">
@@ -11,6 +11,9 @@ export default function Nav (props) {
       </Link>
       <Link to="/credits">
         <div>Credits</div>
+      </Link>
+      <Link to="/quiz">
+        <div>Quiz</div>
       </Link>
       <Link to="/settings">
         <div>Settings</div>
