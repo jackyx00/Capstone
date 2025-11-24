@@ -86,3 +86,15 @@ form {
 .autocomplete-item:hover {
   background: rgb(34, 255, 181);
 }
+
+hr {
+  border-color: black;
+  margin-bottom: 2em;
+}
+
+.allTrades {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid white;
+  border-radius: 6px;
+}
