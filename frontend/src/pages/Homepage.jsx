@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Homepage(props) {
+function Homepage() {
   const [trades, setTrades] = useState([]);
 
   useEffect(() => {

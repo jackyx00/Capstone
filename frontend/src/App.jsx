@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router"
-import Nav from "./components/Nav"
-import Homepage from "./pages/Homepage"
-import Trade from "./pages/Trade"
-import './styles.css'
+import { Route, Routes } from "react-router";
+import Nav from "./components/Nav";
+import Homepage from "./pages/Homepage";
+import Trade from "./pages/Trade";
+import Credits from "./pages/Credits";
+import "./styles.css";
 
 function App() {
   // useEffect(() => {
@@ -17,19 +18,19 @@ function App() {
   // }, []);
 
   return (
-      <div className="App">
-        <Nav />
-        <Routes>
-          {/* homepage */}
-          <Route path="/" element={<Homepage />}/>
-          {/* marketplace */}
-          <Route path="/trade" element={<Trade />}/>
-          {/* credits */}
-          <Route path="/credits"/>
-          {/* settings */}
-          <Route path="/settings"/>
-        </Routes>
-      </div>
+    <div className="App">
+      <Nav />
+      <Routes>
+        {/* homepage */}
+        <Route path="/" element={<Homepage />} />
+        {/* marketplace */}
+        <Route path="/trade" element={<Trade />} />
+        {/* credits */}
+        <Route path="/credits" element={<Credits />} />
+        {/* settings */}
+        <Route path="/settings" />
+      </Routes>
+    </div>
   );
 }
 
