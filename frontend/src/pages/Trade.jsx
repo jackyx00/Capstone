@@ -4,24 +4,41 @@ import PokemonAutocomplete from "../components/PokemonAutocomplete";
 function Trade() {
   const [offer, setOffer] = useState("");
   const [receive, setReceive] = useState("");
+  const port = import.meta.env.VITE_BACKEND_PORT;
+
+  async function validatePokemonName(name) {
+    const res = await fetch(`http://localhost:${port}/pokemon?search=${name}`);
+    const data = await res.json();
+
+    return (
+      data.find((p) => p.name.toLowerCase() === name.toLowerCase()) || null
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(offer, receive)
-    // making sure input not empty
-    if (!offer || !receive) {
-      alert("Please select both Pokémon!");
+
+    const validOffer = await validatePokemonName(offer);
+    const validReceive = await validatePokemonName(receive);
+    if (!validOffer || !validReceive) {
+      let message = "Invalid Pokémon names:\n";
+
+      if (!validOffer) message += `- "${offer}" is not valid\n`;
+      if (!validReceive) message += `- "${receive}" is not valid\n`;
+
+      alert(message);
       return;
     }
 
-    const port = import.meta.env.VITE_BACKEND_PORT;
+    const finalOffer = validOffer.name;
+    const finalReceive = validReceive.name;
 
     await fetch(`http://localhost:${port}/trade`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        offerPokemon: offer,
-        receivePokemon: receive,
+        offerPokemon: finalOffer,
+        receivePokemon: finalReceive,
       }),
     });
 
@@ -38,12 +55,14 @@ function Trade() {
       <form onSubmit={handleSubmit}>
         <PokemonAutocomplete
           label="Pokémon You Are Offering"
-          onSelect={(p) => setOffer(p.name)}
+          value={offer}
+          onChange={setOffer}
         />
 
         <PokemonAutocomplete
           label="Pokémon You Want to Receive"
-          onSelect={(p) => setReceive(p.name)}
+          value={receive}
+          onChange={setReceive}
         />
         <button type="submit">Post Trade</button>
       </form>

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function PokemonAutocomplete({ label, onSelect }) {
-  const [query, setQuery] = useState("");
+function PokemonAutocomplete({ label, value, onChange }) {
   const [suggestions, setSuggestions] = useState([]);
   const [show, setShow] = useState(false);
   const [manualSelect, setManualSelect] = useState(false);
@@ -15,7 +14,7 @@ function PokemonAutocomplete({ label, onSelect }) {
       return;
     }
 
-    if (query.trim().length === 0) {
+    if (value.trim().length === 0) {
       setSuggestions([]);
       return;
     }
@@ -24,18 +23,18 @@ function PokemonAutocomplete({ label, onSelect }) {
       try {
         const port = import.meta.env.VITE_BACKEND_PORT;
         const res = await fetch(
-          `http://localhost:${port}/pokemon?search=${query}`
+          `http://localhost:${port}/pokemon?search=${value}`
         );
         const data = await res.json();
         setSuggestions(data);
         setShow(true);
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
     }
 
     fetchNames();
-  }, [query, manualSelect]);
+  }, [value, manualSelect]);
 
   // Hide dropdown when clicking outside
   useEffect(() => {
@@ -55,10 +54,10 @@ function PokemonAutocomplete({ label, onSelect }) {
       <input
         className="autocomplete-input"
         type="text"
-        value={query}
+        value={value}
         onChange={(e) => {
-            setManualSelect(false);
-            setQuery(e.target.value);
+          setManualSelect(false);
+          onChange(e.target.value);
         }}
         placeholder="Type Pokémon name..."
       />
@@ -70,10 +69,9 @@ function PokemonAutocomplete({ label, onSelect }) {
               key={p.id}
               className="autocomplete-item"
               onClick={() => {
-                setQuery(p.name);
-                setShow(false);
                 setManualSelect(true);
-                onSelect(p);
+                onChange(p.name);
+                setShow(false);
               }}
             >
               {p.name}
@@ -85,4 +83,4 @@ function PokemonAutocomplete({ label, onSelect }) {
   );
 }
 
-export default PokemonAutocomplete
+export default PokemonAutocomplete;
