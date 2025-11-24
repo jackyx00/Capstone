@@ -18,7 +18,7 @@ connectDB().then(() => {
 });
 
 app.get('/', (req, res) => {
-    res.json('Hello from server');
+    res.json('Database Running...');
 });
 
 app.use("/pokemon", pokemonRoute);

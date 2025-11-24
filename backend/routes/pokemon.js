@@ -16,4 +16,19 @@ router.get("/", async (req, res) => {
   res.json(results);
 });
 
+router.get("/by-name/:name", async (req, res) => {
+  try {
+    const name = req.params.name;
+    const pokemon = await PokemonName.findOne({
+      name: new RegExp("^" + name + "$", "i")
+    });
+
+    if (!pokemon) return res.status(404).json(null);
+
+    res.json(pokemon);
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching Pokémon" });
+  }
+});
+
 export default router;
