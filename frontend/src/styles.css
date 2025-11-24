@@ -222,7 +222,7 @@ hr {
 .quiz-image {
   width: 200px;
   margin: 20px 0;
-  filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.3));
 }
 
 .quiz-choices {
