@@ -1,5 +1,8 @@
 # Pokémon Trading Platform
 
+### Live Demo  
+https://poketrade-frontend.netlify.app/
+
 A full-stack MERN project that allows users to trade Pokémon, maintain profiles, earn PokéCoins, and interact with a beginner-friendly online trading system.
 
 This project uses:
@@ -15,6 +18,26 @@ Node.js – Server environment
 PokéAPI – Pokémon data (names, sprites, Dream World and Official artworks)
 
 This platform is designed to simulate a simple Pokémon trading environment with user accounts, autocomplete Pokémon search, quiz-based PokéCoin earning, and trade history tracking.
+
+## Features
+
+- User System
+
+- Pokémon Database
+
+- Pokémon Trading
+
+- “Who’s That Pokémon?” Quiz
+
+- Pokémon-themed UI
+
+## Deployment
+
+**Frontend:** Hosted on Netlify  
+https://poketrade-frontend.netlify.app/
+
+**Backend:** Hosted on Render  
+https://capstone-backend-8zg1.onrender.com/
 
 ## Future Improvements:
 - Include inventory system

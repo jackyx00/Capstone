@@ -291,6 +291,12 @@ hr {
   cursor: pointer;
 }
 
+.login-error {
+  color: red;
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
 .logout-btn {
   margin-top: 20px;
   background: #d32f2f !important;

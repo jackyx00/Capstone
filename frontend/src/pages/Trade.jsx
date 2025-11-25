@@ -6,9 +6,24 @@ function Trade() {
   const [receive, setReceive] = useState("");
 
   const baseURL = import.meta.env.VITE_BASE_URL;
-  
+
   const savedUser = JSON.parse(localStorage.getItem("user"));
   const userId = savedUser?._id;
+
+  if (!userId) {
+    return (
+      <div className="Header">
+        <h2>Trade Pokémon</h2>
+        <p>You must be logged in to post a trade.</p>
+
+        <div style={{ marginTop: "20px" }}>
+          <a href="/profile">
+            <button>Login</button>
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   async function validatePokemonName(name) {
     const res = await fetch(`${baseURL}/pokemon?search=${name}`);
@@ -43,11 +58,14 @@ function Trade() {
       body: JSON.stringify({
         offerPokemon: finalOffer,
         receivePokemon: finalReceive,
-        userId
+        userId,
       }),
     });
 
     alert("Trade posted!");
+
+    setOffer("");
+    setReceive("");
   };
 
   return (

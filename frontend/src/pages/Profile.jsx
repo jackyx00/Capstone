@@ -10,6 +10,8 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
 
+  const [loginError, setLoginError] = useState("");
+
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
@@ -29,6 +31,7 @@ function Profile() {
 
   async function handleLogin(e) {
     e.preventDefault();
+    setLoginError("");
 
     const res = await fetch(`${baseURL}/auth/login`, {
       method: "POST",
@@ -37,6 +40,16 @@ function Profile() {
     });
 
     const data = await res.json();
+
+    if (data.error) {
+      setLoginError("Incorrect username/email or password");
+      setIdentifier("");
+      setPassword("");
+      setEmail("");
+      setUsername("");
+      return;
+    }
+
     if (data.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
@@ -55,6 +68,7 @@ function Profile() {
     });
 
     const data = await res.json();
+
     if (data.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
@@ -95,6 +109,7 @@ function Profile() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {loginError && <p className="login-error">{loginError}</p>}
             <button type="submit">Login</button>
           </form>
         )}
