@@ -18,6 +18,9 @@ export default function Nav() {
       <Link to="/settings">
         <div>Settings</div>
       </Link>
+
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
     </div>
   );
 }

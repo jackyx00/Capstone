@@ -260,3 +260,70 @@ hr {
   font-size: 24px;
   padding: 40px;
 }
+
+/* Register */
+.register-container {
+  width: 350px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container input {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+.register-container button {
+  padding: 12px;
+  background: #3b4cca;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.register-msg {
+  margin-top: 10px;
+  color: red;
+}
+
+/* Login */
+.login-container {
+  width: 350px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+.login-container button {
+  padding: 12px;
+  background: #ffcb05;
+  color: #2a75bb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.login-msg {
+  margin-top: 10px;
+  color: red;
+}

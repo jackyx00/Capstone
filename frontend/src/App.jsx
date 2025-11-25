@@ -5,6 +5,8 @@ import Trade from "./pages/Trade";
 import Credits from "./pages/Credits";
 import Quiz from "./pages/Quiz";
 import "./styles.css";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
         <Route path="/credits" element={<Credits />} />
         {/* quiz */}
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         {/* settings */}
         <Route path="/settings" />
       </Routes>
