@@ -8,6 +8,16 @@ function Quiz() {
 
   const port = import.meta.env.VITE_BACKEND_PORT;
 
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = savedUser?._id;
+
+  useEffect(() => {
+    if (savedUser?.pokecoins !== undefined) {
+      setCoins(savedUser.pokecoins);
+    }
+    loadQuestion();
+  }, []);
+
   async function loadQuestion() {
     const res = await fetch(`http://localhost:${port}/quiz`);
     const data = await res.json();
@@ -16,17 +26,31 @@ function Quiz() {
     setFeedback("");
   }
 
-  useEffect(() => {
-    loadQuestion();
-  }, []);
-
-  function handleAnswer(choice) {
+  async function handleAnswer(choice) {
+    let newCoins;
     if (choice === pokemon.name) {
-      setCoins(coins + 1);
+      newCoins = (savedUser?.pokecoins ?? coins) + 1;
       setFeedback("Correct! +1 PokéCoin");
     } else {
-      setCoins(Math.max(0, coins - 1));
+      newCoins = Math.max(0, coins - 1);
       setFeedback("Wrong! -1 PokéCoin");
+    }
+
+    setCoins(newCoins);
+
+    if (userId) {
+      const res = await fetch(`http://localhost:${port}/quiz/updateCoins`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, pokecoins: newCoins }),
+      });
+
+      const data = await res.json();
+
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setCoins(data.user.pokecoins);
+      }
     }
 
     setTimeout(() => {

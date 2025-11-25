@@ -1,5 +1,6 @@
 import express from "express";
 import PokemonName from "../models/PokemonName.js";
+import User from "../models/User.js";
 
 const router = express.Router();
 
@@ -46,6 +47,27 @@ router.get("/", async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Failed to fetch quiz question" });
+  }
+});
+
+router.post("/updateCoins", async (req, res) => {
+  try {
+    const { userId, pokecoins } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: "Missing userId" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { pokecoins },
+      { new: true }
+    ).select("-password");
+
+    res.json({ success: true, user });
+  } catch (err) {
+    console.error("Error updating coins:", err);
+    res.status(500).json({ error: "Failed to update coins" });
   }
 });
 

@@ -6,22 +6,22 @@ export default function Nav() {
       <Link to="/">
         <div>Home</div>
       </Link>
+
       <Link to="/trade">
         <div>Trade</div>
       </Link>
-      <Link to="/credits">
-        <div>Credits</div>
-      </Link>
+
       <Link to="/quiz">
         <div>Quiz</div>
       </Link>
-      <Link to="/settings">
-        <div>Settings</div>
+
+      <Link to="/credits">
+        <div>Credits</div>
       </Link>
 
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/profile">Profile</Link>
+      <Link to="/profile">
+        <div>Profile</div>
+      </Link>
     </div>
   );
 }
