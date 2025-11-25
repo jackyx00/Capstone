@@ -6,7 +6,7 @@ function Quiz() {
   const [coins, setCoins] = useState(0);
   const [feedback, setFeedback] = useState("");
 
-  const port = import.meta.env.VITE_BACKEND_PORT;
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   const savedUser = JSON.parse(localStorage.getItem("user"));
   const userId = savedUser?._id;
@@ -19,7 +19,7 @@ function Quiz() {
   }, []);
 
   async function loadQuestion() {
-    const res = await fetch(`http://localhost:${port}/quiz`);
+    const res = await fetch(`${baseURL}/quiz`);
     const data = await res.json();
     setPokemon(data);
     setChoices(data.choices);
@@ -39,7 +39,7 @@ function Quiz() {
     setCoins(newCoins);
 
     if (userId) {
-      const res = await fetch(`http://localhost:${port}/quiz/updateCoins`, {
+      const res = await fetch(`${baseURL}/quiz/updateCoins`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, pokecoins: newCoins }),

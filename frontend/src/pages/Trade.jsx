@@ -5,13 +5,13 @@ function Trade() {
   const [offer, setOffer] = useState("");
   const [receive, setReceive] = useState("");
 
-  const port = import.meta.env.VITE_BACKEND_PORT;
+  const baseURL = import.meta.env.VITE_BASE_URL;
   
   const savedUser = JSON.parse(localStorage.getItem("user"));
   const userId = savedUser?._id;
 
   async function validatePokemonName(name) {
-    const res = await fetch(`http://localhost:${port}/pokemon?search=${name}`);
+    const res = await fetch(`${baseURL}/pokemon?search=${name}`);
     const data = await res.json();
 
     return (
@@ -37,7 +37,7 @@ function Trade() {
     const finalOffer = validOffer.name;
     const finalReceive = validReceive.name;
 
-    await fetch(`http://localhost:${port}/trade`, {
+    await fetch(`${baseURL}/trade`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

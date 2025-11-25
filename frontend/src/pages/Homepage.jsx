@@ -7,14 +7,15 @@ function Homepage() {
   const [page, setPage] = useState(1);
   const TRADES_PER_PAGE = 6;
 
+  const baseURL = import.meta.env.VITE_BASE_URL;
+
   // sprite
   const [spriteCache, setSpriteCache] = useState({});
 
   // Load trades from backend
   useEffect(() => {
     async function loadTrades() {
-      const port = import.meta.env.VITE_BACKEND_PORT;
-      const res = await fetch(`http://localhost:${port}/trade`);
+      const res = await fetch(`${baseURL}/trade`);
       const data = await res.json();
       setTrades(data);
     }
@@ -32,8 +33,7 @@ function Homepage() {
   async function fetchSprite(name) {
     if (spriteCache[name]) return spriteCache[name];
 
-    const port = import.meta.env.VITE_BACKEND_PORT;
-    const res = await fetch(`http://localhost:${port}/pokemon/by-name/${name}`);
+    const res = await fetch(`${baseURL}/pokemon/by-name/${name}`);
     const data = await res.json();
 
     const spriteUrl = data?.sprites?.official_artwork_front || null;

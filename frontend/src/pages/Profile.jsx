@@ -10,7 +10,7 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
 
-  const port = import.meta.env.VITE_BACKEND_PORT;
+  const baseURL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const saved = localStorage.getItem("user");
@@ -22,7 +22,7 @@ function Profile() {
   }, []);
 
   async function loadProfile(id) {
-    const res = await fetch(`http://localhost:${port}/profile/${id}`);
+    const res = await fetch(`${baseURL}/profile/${id}`);
     const data = await res.json();
     setUser(data);
   }
@@ -30,7 +30,7 @@ function Profile() {
   async function handleLogin(e) {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:${port}/auth/login`, {
+    const res = await fetch(`${baseURL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ identifier, password }),
@@ -46,7 +46,7 @@ function Profile() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    const res = await fetch(`http://localhost:${port}/auth/register`, {
+    const res = await fetch(`${baseURL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, username, password }),

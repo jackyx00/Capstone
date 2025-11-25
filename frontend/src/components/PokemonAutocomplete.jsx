@@ -7,6 +7,8 @@ function PokemonAutocomplete({ label, value, onChange }) {
 
   const ref = useRef(null);
 
+  const baseURL = import.meta.env.VITE_BASE_URL;
+
   // Search Pokémon names
   useEffect(() => {
     // no refetch if user select
@@ -21,9 +23,8 @@ function PokemonAutocomplete({ label, value, onChange }) {
 
     async function fetchNames() {
       try {
-        const port = import.meta.env.VITE_BACKEND_PORT;
         const res = await fetch(
-          `http://localhost:${port}/pokemon?search=${value}`
+          `${baseURL}/pokemon?search=${value}`
         );
         const data = await res.json();
         setSuggestions(data);
