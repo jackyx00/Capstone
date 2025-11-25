@@ -1,10 +1,6 @@
-import express from "express";
 import PokemonName from "../models/PokemonName.js";
 
-const router = express.Router();
-
-// query to search for pokemon in db using regex
-router.get("/", async (req, res) => {
+export const searchPokemon = async (req, res) => {
   const search = req.query.search?.toLowerCase() || "";
 
   const results = await PokemonName.find({
@@ -14,9 +10,9 @@ router.get("/", async (req, res) => {
     .limit(10);
 
   res.json(results);
-});
+};
 
-router.get("/by-name/:name", async (req, res) => {
+export const getPokemonByName = async (req, res) => {
   try {
     const name = req.params.name;
     const pokemon = await PokemonName.findOne({
@@ -27,9 +23,6 @@ router.get("/by-name/:name", async (req, res) => {
 
     res.json(pokemon);
   } catch (e) {
-    console.error(e);
     res.status(500).json({ error: "Error fetching Pokémon" });
   }
-});
-
-export default router;
+};

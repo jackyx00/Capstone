@@ -3,11 +3,11 @@ import cors from "cors";
 import "dotenv/config";
 import connectDB from "./db.js";
 import runPokemonSetup from "./utils/pokemonSetup.js";
-import pokemonRoute from "./routes/pokemon.js";
-import tradeRoute from "./routes/trade.js";
-import quizRoute from "./routes/quiz.js";
-import authRoute from "./routes/auth.js";
-import profileRoute from "./routes/profile.js";
+import pokemonRouter from "./routes/pokemonRouter.js";
+import tradeRouter from "./routes/tradeRouter.js";
+import quizRouter from "./routes/quizRouter.js";
+import authRouter from "./routes/authRouter.js";
+import profileRouter from "./routes/profileRouter.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -24,11 +24,11 @@ app.get("/", (req, res) => {
   res.json("Database Running...");
 });
 
-app.use("/pokemon", pokemonRoute);
-app.use("/trade", tradeRoute);
-app.use("/quiz", quizRoute);
-app.use("/auth", authRoute);
-app.use("/profile", profileRoute);
+app.use("/pokemon", pokemonRouter);
+app.use("/trade", tradeRouter);
+app.use("/quiz", quizRouter);
+app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
 
 app.listen(port, () => {
   console.log("Listening on port: " + port);
