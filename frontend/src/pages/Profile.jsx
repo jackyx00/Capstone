@@ -39,7 +39,9 @@ function Profile() {
     const data = await res.json();
     if (data.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
-      window.location.reload();
+      setUser(data.user);
+      await loadProfile(data.user._id);
+      setView("none");
     }
   }
 
@@ -55,13 +57,21 @@ function Profile() {
     const data = await res.json();
     if (data.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
-      window.location.reload();
+      setUser(data.user);
+      setView("none");
     }
   }
 
   function logout() {
     localStorage.removeItem("user");
     setUser(null);
+
+    setIdentifier("");
+    setPassword("");
+    setEmail("");
+    setUsername("");
+
+    setView("none");
   }
 
   if (!user) {
