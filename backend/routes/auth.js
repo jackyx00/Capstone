@@ -15,13 +15,22 @@ router.post("/register", async (req, res) => {
     const emailExists = await User.findOne({ email });
     const usernameExists = await User.findOne({ username });
 
-    if (emailExists) return res.status(400).json({ error: "Email already used" });
-    if (usernameExists) return res.status(400).json({ error: "Username already taken" });
+    if (emailExists)
+      return res.status(400).json({ error: "Email already used" });
+    if (usernameExists)
+      return res.status(400).json({ error: "Username already taken" });
 
-    const newUser = await User.create({ email, username, password });
+    const newUser = await User.create({
+      email,
+      username,
+      password,
+      pokecoins: 0,
+      tradeHistory: [],
+    });
 
     res.json({ message: "Registration successful", user: newUser });
-  } catch (err) {
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Failed to register user" });
   }
 });
@@ -37,7 +46,7 @@ router.post("/login", async (req, res) => {
 
     // user can login with email OR username
     const user = await User.findOne({
-      $or: [{ email: identifier }, { username: identifier }]
+      $or: [{ email: identifier }, { username: identifier }],
     });
 
     if (!user) return res.status(400).json({ error: "User not found" });
@@ -47,7 +56,8 @@ router.post("/login", async (req, res) => {
     }
 
     res.json({ message: "Login successful", user });
-  } catch (err) {
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Login error" });
   }
 });

@@ -1,16 +1,22 @@
 import express from "express";
 import OngoingTrade from "../models/OngoingTrade.js";
+import User from "../models/User.js";
 
 const router = express.Router();
 
 // CREATE trade
 router.post("/", async (req, res) => {
   try {
-    const { offerPokemon, receivePokemon } = req.body;
+    const { offerPokemon, receivePokemon, userId } = req.body;
 
     const trade = await OngoingTrade.create({
       offerPokemon,
-      receivePokemon
+      receivePokemon,
+      user: userId,
+    });
+
+    await User.findByIdAndUpdate(userId, {
+      $push: { tradeHistory: trade._id },
     });
 
     res.json(trade);

@@ -4,7 +4,11 @@ import PokemonAutocomplete from "../components/PokemonAutocomplete";
 function Trade() {
   const [offer, setOffer] = useState("");
   const [receive, setReceive] = useState("");
+
   const port = import.meta.env.VITE_BACKEND_PORT;
+  
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = savedUser?._id;
 
   async function validatePokemonName(name) {
     const res = await fetch(`http://localhost:${port}/pokemon?search=${name}`);
@@ -39,6 +43,7 @@ function Trade() {
       body: JSON.stringify({
         offerPokemon: finalOffer,
         receivePokemon: finalReceive,
+        userId
       }),
     });
 

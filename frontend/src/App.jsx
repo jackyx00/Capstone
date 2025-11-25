@@ -7,6 +7,7 @@ import Quiz from "./pages/Quiz";
 import "./styles.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         {/* settings */}
         <Route path="/settings" />
+        {/* profile */}
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
     </div>
   );
